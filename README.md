@@ -1,124 +1,94 @@
-# 🌍 COVID-19 Global Analysis Platform
+# 🌍 COVID-19 Global Analytics Platform
 
-> **Interactive, Professional, and Creative COVID-19 Data Analysis Platform**
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.68+-green.svg)
+![React](https://img.shields.io/badge/React-18+-61DAFB.svg)
+![Docker](https://img.shields.io/badge/Docker-Enabled-2496ED.svg)
+![Status](https://img.shields.io/badge/status-active-success.svg)
 
-[![React](https://img.shields.io/badge/React-18.2-blue.svg)](https://reactjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-Latest-green.svg)](https://fastapi.tiangolo.com/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-blue.svg)](https://www.docker.com/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## 📖 Overview
 
----
+The **COVID-19 Global Analytics Platform** is a comprehensive, full-stack data engineering and analysis solution designed to track, process, and visualize global pandemic trends.
 
-## 🎯 Overview
-
-This project is a comprehensive **Data Engineering and Analysis Platform** designed to process, analyze, and visualize global COVID-19 data. It features a robust ETL pipeline, advanced statistical analysis of 10 critical business problems, and a modern, interactive web application.
-
-## 📁 Project Structure
-
-The project is organized into professional modules:
-
-```text
-Covid_Analysis_Project/
-├── analysis/                   # 📊 EDA, Notebooks & Insights
-│   ├── Exploratory_Data_Analysis.ipynb
-│   ├── Visualization.ipynb
-│   └── INSIGHTS_SUMMARY.md
-├── api/                        # 🚀 FastAPI Backend
-├── data_engineering/           # ⚙️ ETL Pipelines & Scripts
-│   ├── db_creation_script.py
-│   └── get_summay.py
-├── datasets/                   # 💾 Raw & Processed Data
-├── frontend/                   # 🎨 React/Vite Frontend
-├── logs/                       # 📝 System Logs
-└── scripts/                    # 🛠️ Utility Scripts
-```
-
----
+This project features an automated **ETL pipeline** that ingests raw data, a high-performance **FastAPI backend** for data serving, and an interactive **React dashboard** for exploring key metrics like vaccination rates, case fatality ratios, and government response stringency.
 
 ## ✨ Key Features
 
-### 1. Data Engineering
-- **Automated ETL Pipeline**: Extracts data from CSVs, transforms it with cleaning and feature engineering, and loads it into a MySQL database.
-- **Data Quality Checks**: Handles missing values, outliers, and ensures data consistency.
+- **🚀 Automated ETL Pipeline**: Robust Python scripts to extract, transform, and load (ETL) complex COVID-19 datasets into a MySQL warehouse.
+- **📊 Interactive Dashboard**: Modern React frontend with dynamic charts and maps to visualize global and country-specific trends.
+- **⚡ High-Performance API**: RESTful API built with FastAPI, offering low-latency access to aggregated pandemic data.
+- **🐳 Fully Containerized**: Docker Compose setup for one-command deployment of the entire stack (Database, Backend, Frontend).
+- **📈 Advanced Analytics**: Insights into vaccination progress, correlation between policy stringency and infection rates, and more.
 
-### 2. Advanced Analysis
-- **10 Business Problems Solved**: In-depth analysis of transmission dynamics, healthcare capacity, vaccination impact, and more.
-- **Statistical Modeling**: Correlation analysis, regression models, and time-series forecasting.
+## 🛠️ Tech Stack
 
-### 3. Modern Web Platform
-- **Interactive Dashboard**: Real-time global statistics and visualizations.
-- **Business Insights**: Dedicated section showcasing findings for each business problem.
-- **Vaccination Tracker**: Global rollout progress and impact analysis.
+- **Data Engineering**: Python, Pandas, NumPy, SQLAlchemy
+- **Backend**: FastAPI, Uvicorn, MySQL Connector
+- **Frontend**: React, TypeScript, Tailwind CSS, Vite
+- **Database**: MySQL 8.0
+- **DevOps**: Docker, Docker Compose
 
----
+## 📂 Folder Structure
 
-## 🚀 Quick Start
+```
+.
+├── api/                 # FastAPI backend application
+├── data_engineering/    # ETL scripts and data processing logic
+├── frontend/            # React frontend application
+├── datasets/            # Raw CSV data files
+├── docker-compose.yml   # Container orchestration config
+└── scripts/             # Utility scripts
+```
+
+## 🚀 Installation & Usage
 
 ### Prerequisites
-- **Python 3.8+**
-- **Node.js 18+**
-- **MySQL 8.0+**
+- Docker and Docker Compose installed on your machine.
 
-### Installation & Setup
+### Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone <repo-url>
-   cd Covid_Analysis_Project
-   ```
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/yourusername/covid19-global-analytics-platform.git
+    cd covid19-global-analytics-platform
+    ```
 
-2. **Setup Database**
-   Ensure MySQL is running and you have a user `ibadat` with password `ibadat` (or update `data_engineering/db_creation_script.py`).
-   ```bash
-   # Create DB and load raw data
-   python data_engineering/db_creation_script.py
-   
-   # Run ETL pipeline
-   python data_engineering/get_summay.py
-   ```
+2.  **Start the application**
+    ```bash
+    docker-compose up --build
+    ```
 
-3. **Run the Application**
-   Use the helper script to start both backend and frontend:
-   ```bash
-   ./scripts/start_dev.sh
-   ```
+3.  **Access the services**
+    - **Frontend Dashboard**: [http://localhost:3000](http://localhost:3000)
+    - **API Documentation (Swagger UI)**: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
 
-   - **Frontend**: http://localhost:3000
-   - **Backend API**: http://localhost:8000
-   - **API Docs**: http://localhost:8000/api/docs
+## 🔌 API Reference
 
----
+The backend provides a comprehensive set of endpoints for accessing COVID-19 data. Full documentation is available via Swagger UI at `/api/docs`.
 
-## 📊 Business Problems Analyzed
+**Key Endpoints:**
+- `GET /api/stats/global`: Global summary statistics.
+- `GET /api/countries/{country_name}`: Detailed time-series data for a specific country.
+- `GET /api/vaccination/progress`: Global vaccination trends over time.
+- `GET /api/correlation/metrics`: Data for analyzing correlations between various metrics.
 
-1. **Disease Spread Patterns**: Analysis of waves and reproduction rates.
-2. **Healthcare Capacity**: Impact of ICU beds and resources on mortality.
-3. **Vaccination Effectiveness**: Correlation between rollout speed and lives saved.
-4. **Socioeconomic Impact**: How GDP and HDI correlated with outcomes.
-5. **Regional Disparities**: Comparative analysis of continents.
-6. **Policy Effectiveness**: Impact of government stringency measures.
-7. **Pandemic Progression**: Temporal evolution from 2020 to 2022.
-8. **Testing Strategy**: Relationship between testing rates and detection.
-9. **Demographic Risks**: Vulnerability analysis by age and comorbidities.
-10. **Mortality Determinants**: Factors influencing Case Fatality Rates.
+## 🤝 Contributing
 
----
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 🛠️ Technology Stack
+1.  Fork the repository.
+2.  Create your feature branch (`git checkout -b feature/AmazingFeature`).
+3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`).
+4.  Push to the branch (`git push origin feature/AmazingFeature`).
+5.  Open a Pull Request.
 
-- **Frontend**: React, TypeScript, Tailwind CSS, Recharts, Framer Motion
-- **Backend**: FastAPI, Python, Pandas, NumPy, SQLAlchemy
-- **Database**: MySQL
-- **DevOps**: Docker, Shell Scripting
+## 📄 License
 
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👤 Author
+## 📞 Contact
 
-**IBADAT ALI**
-- Data Engineering & Analysis
-- Full Stack Development
+**Ibadat Ali** - [LinkedIn Profile](https://linkedin.com/in/yourprofile)
 
----
-
-*Last Updated: November 2025*
+Project Link: [https://github.com/yourusername/covid19-global-analytics-platform](https://github.com/yourusername/covid19-global-analytics-platform)
