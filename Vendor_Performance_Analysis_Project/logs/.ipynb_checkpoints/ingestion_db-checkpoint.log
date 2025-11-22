@@ -1,0 +1,14 @@
+2025-09-21 23:06:49,868 - INFO - Ingesting file: begin_inventory.csv with shape: (206529, 9)
+2025-09-21 23:06:52,249 - INFO - Table 'begin_inventory' ingested successfully.
+2025-09-21 23:06:52,693 - INFO - Ingesting file: end_inventory.csv with shape: (224489, 9)
+2025-09-21 23:06:56,237 - INFO - Table 'end_inventory' ingested successfully.
+2025-09-21 23:07:02,321 - INFO - Ingesting file: purchases.csv with shape: (2372474, 16)
+2025-09-21 23:07:49,525 - INFO - Table 'purchases' ingested successfully.
+2025-09-21 23:07:49,681 - INFO - Ingesting file: purchase_prices.csv with shape: (12261, 9)
+2025-09-21 23:07:49,896 - INFO - Table 'purchase_prices' ingested successfully.
+2025-09-21 23:08:13,849 - INFO - Ingesting file: sales.csv with shape: (12825363, 14)
+2025-09-21 23:11:54,039 - INFO - Table 'sales' ingested successfully.
+2025-09-21 23:11:54,353 - INFO - Ingesting file: vendor_invoice.csv with shape: (5543, 10)
+2025-09-21 23:11:56,170 - INFO - Table 'vendor_invoice' ingested successfully.
+2025-09-21 23:11:56,170 - INFO - Total time taken for ingestion: 5.11 minutes
+2025-09-23 21:43:29,753 - INFO - Creating vendor summary table*******************
