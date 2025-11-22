@@ -19,10 +19,10 @@ logging.basicConfig(
 )
 
 # MySQL connection details (using password-based user)
-MYSQL_USER = "ibadat"
-MYSQL_PASSWORD = "ibadat"
-MYSQL_HOST = "localhost"
-DATABASE_NAME = "covid_db"
+MYSQL_USER = os.getenv("DB_USER", "ibadat")
+MYSQL_PASSWORD = os.getenv("DB_PASSWORD", "ibadat")
+MYSQL_HOST = os.getenv("DB_HOST", "localhost")
+DATABASE_NAME = os.getenv("DB_NAME", "covid_db")
 
 # Step 1-2: Connect to MySQL Server
 # Step 3: Create covid_db database

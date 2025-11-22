@@ -46,7 +46,12 @@ This project features an automated **ETL pipeline** that ingests raw data, a hig
 ### Prerequisites
 - Docker and Docker Compose installed on your machine.
 
-### Quick Start
+### 🚀 Installation & Usage
+
+You can run this project using **Docker** (Recommended) or **Manually**.
+
+#### Option 1: Docker (Recommended)
+This is the easiest way to get everything running.
 
 1.  **Clone the repository**
     ```bash
@@ -58,10 +63,75 @@ This project features an automated **ETL pipeline** that ingests raw data, a hig
     ```bash
     docker-compose up --build
     ```
+    *This will start the MySQL database, FastAPI backend, and React frontend.*
 
-3.  **Access the services**
+3.  **Load Data (First Time Only)**
+    The database will be empty initially. To populate it:
+    - Open a new terminal.
+    - Run the data loader script inside the backend container:
+      ```bash
+      # Enter the backend container
+      docker exec -it covid_backend bash
+
+      # Run the database creation and data loading script
+      python ../data_engineering/db_creation_script.py
+      ```
+
+4.  **Access the services**
     - **Frontend Dashboard**: [http://localhost:3000](http://localhost:3000)
-    - **API Documentation (Swagger UI)**: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+    - **API Documentation**: [http://localhost:8000/api/docs](http://localhost:8000/api/docs)
+
+#### Option 2: Manual Installation
+If you prefer to run services individually or don't have Docker.
+
+**Prerequisites:**
+- Python 3.9+
+- Node.js 16+
+- MySQL 8.0
+
+**Step 1: Database Setup**
+1.  Install and start MySQL.
+2.  Create a user `ibadat` with password `ibadat` (or update `api/main.py` and `data_engineering/db_creation_script.py` with your credentials).
+3.  Create the database:
+    ```sql
+    CREATE DATABASE covid_db;
+    ```
+
+**Step 2: Backend Setup**
+1.  Navigate to the project root.
+2.  Create a virtual environment:
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # Windows: .venv\Scripts\activate
+    ```
+3.  Install dependencies:
+    ```bash
+    pip install fastapi uvicorn mysql-connector-python pandas sqlalchemy
+    ```
+4.  Run the data ingestion script:
+    ```bash
+    python data_engineering/db_creation_script.py
+    ```
+5.  Start the API server:
+    ```bash
+    cd api
+    uvicorn main:app --reload
+    ```
+
+**Step 3: Frontend Setup**
+1.  Navigate to the frontend directory:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the development server:
+    ```bash
+    npm run dev
+    ```
+4.  Open [http://localhost:5173](http://localhost:5173) (or the port shown in your terminal).
 
 ## 🔌 API Reference
 

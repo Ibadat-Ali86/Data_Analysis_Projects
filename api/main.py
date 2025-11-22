@@ -36,12 +36,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+import os
+
 # Database configuration
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "ibadat",
-    "password": "ibadat",
-    "database": "covid_db"
+    "host": os.getenv("DB_HOST", "localhost"),
+    "user": os.getenv("DB_USER", "ibadat"),
+    "password": os.getenv("DB_PASSWORD", "ibadat"),
+    "database": os.getenv("DB_NAME", "covid_db")
 }
 
 # Helper functions
