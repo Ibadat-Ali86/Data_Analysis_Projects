@@ -89,6 +89,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Ibadat Ali** - [LinkedIn Profile](https://linkedin.com/in/yourprofile)
+**Ibadat Ali** - [LinkedIn Profile](https://linkedin.com/in/mirzaibadatali)
 
 Project Link: [https://github.com/yourusername/covid19-global-analytics-platform](https://github.com/yourusername/covid19-global-analytics-platform)
