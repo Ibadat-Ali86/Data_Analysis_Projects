@@ -111,8 +111,8 @@ async def get_global_stats():
         COUNT(DISTINCT country_name) as countries_count,
         COUNT(DISTINCT continent_name) as continents_count,
         MAX(month_start_date) as latest_date
-    FROM covid_monthly_summary
-    WHERE month_start_date = (SELECT MAX(month_start_date) FROM covid_monthly_summary)
+    FROM final_covid
+    WHERE month_start_date = (SELECT MAX(month_start_date) FROM final_covid)
     """
     result = query_to_json(query)
     return result[0] if result else {}
@@ -136,7 +136,7 @@ async def get_timeline(
     SELECT 
         month_start_date,
         SUM({metric}) as value
-    FROM covid_monthly_summary
+    FROM final_covid
     GROUP BY month_start_date
     ORDER BY month_start_date DESC
     LIMIT {limit}
@@ -151,8 +151,8 @@ async def get_countries():
         country_name,
         continent_name,
         total_population
-    FROM covid_monthly_summary
-    WHERE month_start_date = (SELECT MAX(month_start_date) FROM covid_monthly_summary)
+    FROM final_covid
+    WHERE month_start_date = (SELECT MAX(month_start_date) FROM final_covid)
     ORDER BY country_name
     """
     return query_to_json(query)
@@ -170,7 +170,7 @@ async def get_country_data(
     
     query = f"""
     SELECT *
-    FROM covid_monthly_summary
+    FROM final_covid
     WHERE country_name = '{country_name}'
     {date_filter}
     ORDER BY month_start_date
@@ -188,8 +188,8 @@ async def get_continent_comparison(
         SUM({metric}) as total_value,
         AVG({metric}) as avg_value,
         COUNT(DISTINCT country_name) as country_count
-    FROM covid_monthly_summary
-    WHERE month_start_date = (SELECT MAX(month_start_date) FROM covid_monthly_summary)
+    FROM final_covid
+    WHERE month_start_date = (SELECT MAX(month_start_date) FROM final_covid)
     GROUP BY continent_name
     ORDER BY total_value DESC
     """
@@ -207,8 +207,8 @@ async def get_top_countries(
         continent_name,
         {metric} as value,
         total_population
-    FROM covid_monthly_summary
-    WHERE month_start_date = (SELECT MAX(month_start_date) FROM covid_monthly_summary)
+    FROM final_covid
+    WHERE month_start_date = (SELECT MAX(month_start_date) FROM final_covid)
     ORDER BY {metric} DESC
     LIMIT {limit}
     """
@@ -223,7 +223,7 @@ async def get_vaccination_progress():
         AVG(people_vaccinated_per_100_month_end) as avg_one_dose,
         AVG(people_fully_vaccinated_per_100_month_end) as avg_fully_vaccinated,
         SUM(monthly_vaccinations) as total_monthly_doses
-    FROM covid_monthly_summary
+    FROM final_covid
     WHERE people_vaccinated_per_100_month_end IS NOT NULL
     GROUP BY month_start_date
     ORDER BY month_start_date
@@ -242,8 +242,8 @@ async def get_correlation_data():
         people_fully_vaccinated_per_100_month_end,
         avg_test_positivity_rate,
         total_population
-    FROM covid_monthly_summary
-    WHERE month_start_date = (SELECT MAX(month_start_date) FROM covid_monthly_summary)
+    FROM final_covid
+    WHERE month_start_date = (SELECT MAX(month_start_date) FROM final_covid)
     AND monthly_new_cases IS NOT NULL
     AND monthly_new_deaths IS NOT NULL
     """
@@ -258,7 +258,7 @@ async def get_business_problem_data(problem_id: int):
             SELECT continent_name, month_start_date, 
                    SUM(monthly_new_cases) as cases,
                    AVG(monthly_reproduction_rate) as reproduction_rate
-            FROM covid_monthly_summary
+            FROM final_covid
             GROUP BY continent_name, month_start_date
             ORDER BY month_start_date
         """,
@@ -267,7 +267,7 @@ async def get_business_problem_data(problem_id: int):
                    AVG(avg_icu_patients) as avg_icu,
                    AVG(avg_hospital_patients) as avg_hospital,
                    AVG(hospital_beds_per_thousand) as beds_per_1000
-            FROM covid_monthly_summary
+            FROM final_covid
             WHERE avg_icu_patients IS NOT NULL
             GROUP BY country_name
             ORDER BY avg_icu DESC
@@ -277,7 +277,7 @@ async def get_business_problem_data(problem_id: int):
             SELECT month_start_date,
                    AVG(people_fully_vaccinated_per_100_month_end) as vaccination_rate,
                    AVG(monthly_new_deaths) as avg_deaths
-            FROM covid_monthly_summary
+            FROM final_covid
             WHERE people_fully_vaccinated_per_100_month_end > 0
             GROUP BY month_start_date
             ORDER BY month_start_date
@@ -297,7 +297,7 @@ async def search_data(
     """Search functionality"""
     query = f"""
     SELECT DISTINCT {field}
-    FROM covid_monthly_summary
+    FROM final_covid
     WHERE {field} LIKE '%{query_text}%'
     LIMIT 20
     """
@@ -308,8 +308,8 @@ async def export_summary():
     """Export summary data"""
     query = """
     SELECT *
-    FROM covid_monthly_summary
-    WHERE month_start_date = (SELECT MAX(month_start_date) FROM covid_monthly_summary)
+    FROM final_covid
+    WHERE month_start_date = (SELECT MAX(month_start_date) FROM final_covid)
     ORDER BY total_confirmed_cases_month_end DESC
     LIMIT 100
     """
