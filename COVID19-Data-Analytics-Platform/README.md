@@ -55,8 +55,8 @@ This is the easiest way to get everything running.
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/Ibadat-Ali86/Data_Analysis_Projects.git
-    cd Data_Analysis_Projects/COVID19-Data-Analytics-Platform
+    git clone https://github.com/yourusername/covid19-global-analytics-platform.git
+    cd covid19-global-analytics-platform
     ```
 
 2.  **Start the application**
@@ -161,4 +161,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Ibadat Ali** - [LinkedIn Profile](https://linkedin.com/in/mirzaibadatali)
 
-Project Link: [https://github.com/Ibadat-Ali86/Data_Analysis_Projects](https://github.com/Ibadat-Ali86/Data_Analysis_Projects/tree/main/COVID19-Data-Analytics-Platform)
+Project Link: [https://github.com/yourusername/covid19-global-analytics-platform](https://github.com/yourusername/covid19-global-analytics-platform)
