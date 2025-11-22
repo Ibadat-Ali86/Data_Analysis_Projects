@@ -76,18 +76,23 @@ def ingest_db(df, table, engine):
 # Load CSVs from current directory and push into DB
 def load_raw_data():
     start = time.time()
-    directory = os.getcwd()
+    
+    # Robustly find the datasets directory relative to this script
+    # This script is in /data_engineering, datasets are in /datasets (sibling)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(script_dir)
+    datasets_dir = os.path.join(project_root, 'datasets')
 
-    if not os.path.exists(directory):
-        logging.error(f"Directory does not exist: {directory}")
-        print(f" Directory does not exist: {directory}")
+    if not os.path.exists(datasets_dir):
+        logging.error(f"Datasets directory not found at: {datasets_dir}")
+        print(f" Datasets directory not found at: {datasets_dir}")
         return
 
     # Essential CSV files
     essential_files = ['CovidDeaths.csv', 'CovidVaccinations.csv']
 
     for file in essential_files:
-        file_path = os.path.join(directory, '..', 'datasets', file)
+        file_path = os.path.join(datasets_dir, file)
         if os.path.exists(file_path):
             try:
                 print(f" Loading {file}...")
