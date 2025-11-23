@@ -157,8 +157,38 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+## ❓ Troubleshooting
+
+### Common Issues
+
+#### 1. Docker "KeyError: 'ContainerConfig'"
+If you encounter this error during `docker-compose up`:
+```bash
+KeyError: 'ContainerConfig'
+```
+**Solution:**
+This is caused by a corrupted Docker state or version mismatch. Run the following to clean up and rebuild:
+```bash
+# Remove existing containers
+docker rm -f covid_backend covid_frontend
+
+# Rebuild with no cache
+docker-compose build --no-cache
+
+# Start again
+docker-compose up -d
+```
+
+#### 2. Database Connection Failed
+If the backend cannot connect to the database:
+- Ensure your local MySQL server is running (`sudo systemctl status mysql`).
+- Verify the credentials in `docker-compose.yml` match your local MySQL setup.
+- The backend uses `network_mode: "host"`, so it connects to your machine's `localhost`.
+
+---
+
 ## 📞 Contact
 
 **Ibadat Ali** - [LinkedIn Profile](https://linkedin.com/in/mirzaibadatali)
 
-Project Link: [https://github.com/yourusername/covid19-global-analytics-platform](https://github.com/yourusername/covid19-global-analytics-platform)
+Project Link: [https://github.com/Ibadat-Ali86/Data_Analysis_Projects/tree/main/COVID19-Data-Analytics-Platform](https://github.com/Ibadat-Ali86/Data_Analysis_Projects/tree/main/COVID19-Data-Analytics-Platform)
