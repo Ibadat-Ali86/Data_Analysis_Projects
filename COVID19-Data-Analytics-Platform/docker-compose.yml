@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: covid_backend
+    network_mode: "host"
+    environment:
+      - DB_HOST=localhost
+      - DB_USER=ibadat
+      - DB_PASSWORD=ibadat
+      - DB_NAME=covid_db
+    volumes:
+      - ./api:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  # React Frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: covid_frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - backend
+    networks:
+      - covid_network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+networks:
+  covid_network:
+    driver: bridge
+
