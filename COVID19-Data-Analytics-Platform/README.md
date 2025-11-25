@@ -1,5 +1,7 @@
 # 🌍 COVID-19 Global Analytics Platform
 
+Video Overview of This Project Here: https://drive.google.com/file/d/1uP5nPym941APlyB03HoBE_DBURgcPvrF/view?usp=drive_link
+
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/python-3.9+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.68+-green.svg)
